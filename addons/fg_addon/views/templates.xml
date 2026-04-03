@@ -1,0 +1,239 @@
+<odoo>
+    <data>
+      <template id="players">
+        <t t-call="fg_addon.layout">
+            <t t-set="content">
+
+                      <div class="row">
+                          <div class="col-12">
+                              <div class="card">
+                                  <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="row mb-3">
+                                                  <div class="col-4">
+                                                      <button class="btn btn-success add_player_btn" >Add Player</button>
+                                                      
+                                                  </div>
+                                                  <div class="col-4">
+                                                      <!-- <button class="btn btn-info add_subscription_plan_btn" >Add Subscription Plan</button> -->
+                                                      
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <!-- <div class="table-card">
+                                                    <table class="table table-hover table-centered align-middle  mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                              <th>Name</th>
+                                                              <th>Mobile</th>
+                                                              <th>Plan</th>
+                                                              <th>Today Usage</th>
+                                                              <th>Today Remaining</th>
+                                                              <th>Plan Usage</th>
+                                                              <th>Plan Remaining</th>
+                                                              <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr t-foreach="players" t-as="player">
+                                                              <td><i t-if="player.has_running_session()" class="mdi mdi-dots-circle mdi-spin text-success fs-22"></i>  <t t-out="player.name"/>  </td>
+                                                              <td><t t-out="player.mobile"/></td>
+                                                              <td>
+                                                                    <t t-if="player.current_active_subscription">
+                                                                        Plan : <t t-out="player.current_active_subscription.name.name"/> - <t t-out="player.current_active_subscription.name.hours"/> Hours Daily - <t t-out="player.current_active_subscription.name.price"/> Sar<br/>
+                                                                        Start : <t t-out="player.current_active_subscription.start"/><br/>
+                                                                        End : <t t-out="player.current_active_subscription.end"/><br/>
+                                                                        States : <t t-out="'Active' if player.current_active_subscription.active else 'Expired'"/>
+                                                                    </t>
+                                                                    
+                                                                    
+                                                              </td>
+                                                              <td><t t-out="player.current_active_subscription.today_usage() if player.current_active_subscription else 0"/> </td>
+                                                              <td><t t-out="player.current_active_subscription.today_remaining() if player.current_active_subscription else 0"/> </td>
+                                                              <td><t t-out="player.current_active_subscription.monthly_usage() if player.current_active_subscription else 0"/> </td>
+                                                              <td><t t-out="player.current_active_subscription.monthly_remaining() if player.current_active_subscription else 0"/> </td>
+                                                              
+                                                              <td>
+                                                                  <div class="dropdown">
+                                                                      <button type="button" class="btn btn-icon" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                          <i class="ri-more-fill"></i>
+                                                                      </button>
+                                                                      <ul class="dropdown-menu dropdown-menu-end">
+                                                                          <li t-if="not player.has_running_session()">
+                                                                              <a class="dropdown-item start_player_session" t-att-data-player_id="player.id" href="javascript:void(0)" >Start Session</a>
+                                                                          </li>
+                                                                          <li t-if="player.has_running_session()">
+                                                                              <a class="dropdown-item end_player_session" t-att-data-player_session="player.Current_running_session()" href="javascript:void(0)" >End Session</a>
+                                                                          </li>
+                                                                          <li>
+                                                                              <a class="dropdown-item" href="/" >Edit</a>
+                                                                          </li>
+                                                                          <li>
+                                                                              <a class="dropdown-item" href="/" >Manage Subscription</a>
+                                                                          </li>
+                                                                      </ul>
+                                                                  </div>
+                                                              </td>
+
+                                                              
+
+                                                          </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> -->
+                                                <div class="card shadow-sm border-0 rounded-3">
+                                                  <div class="card-header text-white py-3">
+                                                    <h5 class="mb-0">
+                                                      🎮 Player Subscriptions Overview
+                                                    </h5>
+                                                  </div>
+
+                                                  <div class="card-body p-0">
+                                                    <table id="admin_players_table" class="table table-hover table-striped align-middle mb-0">
+                                                      <thead class="table text-center">
+                                                        <tr>
+                                                          <th>Player</th>
+                                                          <th>Mobile</th>
+                                                          <th>Plan Details</th>
+                                                          <th>Today Usage</th>
+                                                          <th>Today Remaining</th>
+                                                          <th>Plan Usage</th>
+                                                          <th>Plan Remaining</th>
+                                                          <th>Action</th>
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                        <tr t-foreach="players" t-as="player" t-attf-class="text-center #{'bg-success-subtle' if player.has_running_session() else ''}">
+                                                          <td>
+                                                            <t t-if="player.has_running_session()">
+                                                              <i class="mdi mdi-dots-circle mdi-spin text-success fs-5 me-1" title="Active Session"></i>
+                                                            </t>
+                                                            <strong><t t-esc="player.name"/></strong>
+                                                          </td>
+                                                          <td><t t-esc="player.mobile"/></td>
+                                                          <td class="text-start">
+                                                            <t t-if="player.current_active_subscription">
+                                                              <div class="fw-semibold text-primary">
+                                                                Plane : <t t-esc="player.current_active_subscription.name.name"/>
+                                                              </div>
+                                                              <small>
+                                                                ⏱️ <t t-esc="player.current_active_subscription.name.hours"/> hrs/day |
+                                                                💰 <t t-esc="player.current_active_subscription.name.price"/> SAR
+                                                              </small><br/>
+                                                              <small>
+                                                                🗓️ <strong>Start:</strong> <t t-esc="player.current_active_subscription.start"/><br/>
+                                                                🗓️ <strong>End:</strong> <t t-esc="player.current_active_subscription.end"/>
+                                                              </small><br/>
+                                                              Status : <span t-attf-class="badge rounded-pill mt-1 #{'bg-success' if player.current_active_subscription.active else 'bg-secondary'}">
+                                                                <t t-esc="'Active' if player.current_active_subscription.active else 'Expired'"/>
+                                                              </span>
+                                                            </t>
+                                                            <t t-else="">
+                                                              <span class="text-muted">No Active Plan</span>
+                                                            </t>
+                                                          </td>
+
+                                                          <td><span class="badge bg-info fs-6"><t t-esc="player.current_active_subscription.today_usage() if player.current_active_subscription else '00:00'"/></span></td>
+                                                          <td><span class="badge bg-warning text-dark fs-6"><t t-esc="player.current_active_subscription.today_remaining() if player.current_active_subscription else '00:00'"/></span></td>
+                                                          <td><span class="badge bg-primary fs-6"><t t-esc="player.current_active_subscription.plan_usage() if player.current_active_subscription else '00:00'"/></span></td>
+                                                          <td><span class="badge bg-success fs-6"><t t-esc="player.current_active_subscription.plan_remaining() if player.current_active_subscription else '00:00'"/></span></td>
+
+                                                          <td>
+                                                            <div class="dropdown">
+                                                              <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="ri-settings-3-line"></i>
+                                                              </button>
+                                                              <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                                                <li t-if="player.can_start_session()">
+                                                                  <a class="dropdown-item start_player_session" t-att-data-player_id="player.id" href="javascript:void(0)">
+                                                                    ▶️ Start Session
+                                                                  </a>
+                                                                </li>
+                                                                <li t-if="not player.can_start_session()">
+                                                                  <a class="dropdown-item" t-att-data-player_id="player.id" style="background-color: #eb666687;" href="javascript:void(0)">
+                                                                    <i class="ri-information-line fs-16 me-1 text-danger"></i> Player Cant Start Session
+                                                                  </a>
+                                                                </li>
+                                                                <li t-if="player.has_running_session()">
+                                                                  <a class="dropdown-item end_player_session"  t-att-data-player_session="player.Current_running_session()" href="javascript:void(0)">
+                                                                    ⏹️ End Session
+                                                                  </a>
+                                                                </li>
+                                                                <!-- <li><hr class="dropdown-divider"/></li> -->
+                                                                <!-- <li>
+                                                                  <a class="dropdown-item" href="/">
+                                                                    ✏️ Edit
+                                                                  </a>
+                                                                </li> -->
+                                                                <li>
+                                                                  <a class="dropdown-item manage_player_subscription" t-att-data-player_id="player.id" t-att-data-player_name="player.name" href="javascript:void(0)">
+                                                                    💳 Manage Subscription
+                                                                  </a>
+                                                                </li>
+                                                                <li t-if="player.current_active_subscription">
+                                                                  <a class="dropdown-item end_player_subscription" t-att-data-subscription_id="player.current_active_subscription.id"  href="javascript:void(0)">
+                                                                    <i class="ri-delete-bin-line fs-16 me-1 text-danger"></i> End Subscription
+                                                                  </a>
+                                                                </li>
+                                                                <li>
+                                                                  <a class="dropdown-item" t-attf-href="/player/subscription/#{player.uniqe_player_code()}" target="_blank">
+                                                                    <i class="ri-information-line fs-16 me-1 text-primary"></i> Subscription Details 
+                                                                    
+                                                                  </a>
+                                                                </li>
+                                                                <li>
+                                                                  <a class="dropdown-item" t-att-href="player.whatsapp_link()" target="_blank">
+                                                                    <i class="ri-whatsapp-line fs-16 me-1 text-success"></i> Send To Player
+                                                                    
+                                                                  </a>
+                                                                </li>
+                                                              </ul>
+                                                            </div>
+                                                          </td>
+                                                        </tr>
+                                                      </tbody>
+                                                    </table>
+                                                  </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                          
+                                  </div>
+
+                              </div>
+                          </div>
+                      </div>
+
+            </t>
+        </t>
+
+      </template>
+
+<!--
+        <template id="listing">
+          <ul>
+            <li t-foreach="objects" t-as="object">
+              <a t-attf-href="#{ root }/objects/#{ object.id }">
+                <t t-esc="object.display_name"/>
+              </a>
+            </li>
+          </ul>
+        </template>
+        <template id="object">
+          <h1><t t-esc="object.display_name"/></h1>
+          <dl>
+            <t t-foreach="object._fields" t-as="field">
+              <dt><t t-esc="field"/></dt>
+              <dd><t t-esc="object[field]"/></dd>
+            </t>
+          </dl>
+        </template>
+-->
+    </data>
+</odoo>

@@ -1,0 +1,107 @@
+<odoo>
+    <data>
+
+        <template id="fg_addon.layout_main_js">
+            <!-- JAVASCRIPT -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+
+
+            <script>
+                $(function() {
+                let __step = 1;
+
+                function showStep(n) {
+                    $('.1_step').addClass('hidden');
+                    $(`.1_step[data-step=${n}]`).removeClass('hidden').addClass('w_fade');
+                    $('.prev').toggle(n &gt; 1);
+                    $('.next').text(n === 5 ? 'Finish' : 'Next');
+                }
+
+                $('.next').click(function() {
+                    if (__step &lt; 5) {
+                    __step++;
+                    showStep(__step);
+                    } else {
+                    $('#steps_modal').fadeOut(600);
+                    }
+                });
+
+                $('.prev').click(function() {
+                    if (__step &gt; 1) {
+                    __step--;
+                    showStep(__step);
+                    }
+                });
+
+                showStep(__step);
+                });
+            </script>            
+            <script src="https://ws.madar-clinic.com/socket.io/socket.io.js"></script>
+            <script t-attf-src="/fg_addon/static/modern/assets/js/socket_io.js?ver=#{request.env.user.js_ver()}"></script>
+            <!-- <script t-attf-src="/fg_addon/static/modern/assets/js/push_notify.js?ver=#{request.env.user.js_ver()}"></script> -->
+            <!-- <script type="module">
+                
+            </script> -->
+            
+            <script src="/fg_addon/static/modern/assets/libs/dropzone/dropzone-min.js"></script> 
+            <script>
+                Dropzone.autoDiscover = false;
+            </script>
+            <script type="module" t-attf-src="/fg_addon/static/modern/assets/js/fcm_init.js?ver=#{request.env.user.js_ver()}"></script>
+            <!--datatable js-->
+            <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+            <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <!-- <script type="module" t-attf-src="/fg_addon/static/modern/assets/js/fcm_push_notify.js?ver=#{request.env.user.js_ver()}"></script> -->
+
+
+            <script src="/fg_addon/static/modern/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="/fg_addon/static/modern/assets/libs/simplebar/simplebar.min.js"></script>
+            <script src="/fg_addon/static/modern/assets/libs/node-waves/waves.min.js"></script>
+            <script src="/fg_addon/static/modern/assets/libs/feather-icons/feather.min.js"></script>
+            <script src="/fg_addon/static/modern/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+            <script t-attf-src="/fg_addon/static/modern/assets/js/plugins.js?ver=1"></script>
+            <script src="/fg_addon/static/modern/assets/libs/swiper/swiper-bundle.min.js"></script>
+
+            <script src="/fg_addon/static/modern/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+            <script src="/fg_addon/static/modern/assets/js/pages/sweetalerts.init.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.11.6/bundle/libphonenumber-max.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+            <script src="/fg_addon/static/modern/assets/js/pages/select2.init.js"></script>
+            <script src="/fg_addon/static/modern/assets/js/custome_select2.js?ver=4"></script>
+            <!-- list.js min js -->
+            <script t-attf-src="/fg_addon/static/modern/assets/libs/list.js/list.min.js"></script>
+
+            <!--list pagination js-->
+            <script t-attf-src="/fg_addon/static/modern/assets/libs/list.pagination.js/list.pagination.min.js"></script>
+            <script src="/fg_addon/static/modern/assets/libs/fullcalendar/index.global.min.js"></script>
+
+            <script t-attf-src="/fg_addon/static/modern/assets/js/update_wizzard_steps.js?ver=#{request.env.user.js_ver()}"></script>
+
+
+            <script t-attf-src="/fg_addon/static/modern/assets/js/pages/base_js_template.js?ver=#{request.env.user.js_ver()}"></script>
+            
+            <script t-attf-src="/fg_addon/static/modern/assets/js/pages/dynamic_modal.init.js?ver=#{request.env.user.js_ver()}"></script>
+            <script t-attf-src="/fg_addon/static/modern/assets/js/pages/dynamic_datatable.js?ver=#{request.env.user.js_ver()}"></script>
+            <!-- <script t-attf-src="/fg_addon/static/modern/assets/js/pages/branches.init.js?ver=#{request.env.user.js_ver()}"></script> -->
+            <!-- <script t-attf-src="/fg_addon/static/modern/assets/js/pages/staff_list.init.js?ver=#{request.env.user.js_ver()}"></script>
+            <script t-attf-src="/fg_addon/static/modern/assets/js/pages/staff_profile.init.js?ver=#{request.env.user.js_ver()}"></script>
+            <script t-attf-src="/fg_addon/static/modern/assets/js/pages/staff_profile_edit.init.js?ver=#{request.env.user.js_ver()}"></script>
+            <script t-attf-src="/fg_addon/static/modern/assets/js/pages/patient_tasks_list.init.js?ver=#{request.env.user.js_ver()}"></script>
+            <script t-attf-src="/fg_addon/static/modern/assets/js/pages/patient_list.init.js?ver=#{request.env.user.js_ver()}"></script>
+            <script t-attf-src="/fg_addon/static/modern/assets/js/pages/first-run-wizard.init.js?ver=#{request.env.user.js_ver()}"></script> -->
+            <script t-attf-src="/fg_addon/static/src/js/fantasy_game_base.js?ver=#{request.env.user.js_ver()}"></script>
+
+
+        </template>
+
+    </data>
+</odoo>

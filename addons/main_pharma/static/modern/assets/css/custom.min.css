@@ -1,0 +1,36 @@
+.select2-container--default .select2-selection--multiple {
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: text;
+    padding-bottom: 0;
+    padding-top: 0px;
+    padding-right: 5px;
+    position: relative;
+    display: flex;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 ,body , .navbar-menu .navbar-nav .nav-link {
+    font-family: "Cairo", sans-serif !important;
+}
+#sharedModal {
+    z-index: 1060;
+}
+
+.auth-one-bg{
+
+    
+  background-image: url("../images/logincover.jpg");
+  background-position: center;
+  background-size: cover;
+
+}
+
+.wizzard_main_logo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+}

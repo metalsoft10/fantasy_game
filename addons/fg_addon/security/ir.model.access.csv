@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+fg_addon.access_player_subscription_plan,access_player_subscription_plan,fg_addon.model_player_subscription_plan,base.group_user,1,1,1,1
+fg_addon.access_player_subscription,access_player_subscription,fg_addon.model_player_subscription,base.group_user,1,1,1,1
+fg_addon.access_player_subscription_usage,access_player_subscription_usage,fg_addon.model_player_subscription_usage,base.group_user,1,1,1,1

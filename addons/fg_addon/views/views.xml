@@ -1,0 +1,83 @@
+<odoo>
+  <data>
+    <record id="fg_addon_res_partnerinherit_view_form" model="ir.ui.view">
+            <field name="name">fg_addon.res.partner.inherit.view.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//field[@name='vat']" position="after">
+                <field name="is_player"/>
+                <field name="is_shop_user"/>
+                <field name="current_active_subscription"/>
+                <field name="subscription_plan_id"/>
+              </xpath>
+              <xpath expr="//page[@name='contact_addresses']" position="after">
+                <page name="subscription_plan_usage" string="Player Usage">
+                    <group>
+                        <field name="subscription_usage_ids"/>
+                    </group>
+                </page>
+              </xpath>
+
+
+            </field>
+    </record>
+                
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="fg_addon.list">
+      <field name="name">fg_addon list</field>
+      <field name="model">fg_addon.fg_addon</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="fg_addon.action_window">
+      <field name="name">fg_addon window</field>
+      <field name="res_model">fg_addon.fg_addon</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="fg_addon.action_server">
+      <field name="name">fg_addon server</field>
+      <field name="model_id" ref="model_fg_addon_fg_addon"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="fg_addon" id="fg_addon.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="fg_addon.menu_1" parent="fg_addon.menu_root"/>
+    <menuitem name="Menu 2" id="fg_addon.menu_2" parent="fg_addon.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="fg_addon.menu_1_list" parent="fg_addon.menu_1"
+              action="fg_addon.action_window"/>
+    <menuitem name="Server to list" id="fg_addon" parent="fg_addon.menu_2"
+              action="fg_addon.action_server"/>
+-->
+  </data>
+</odoo>

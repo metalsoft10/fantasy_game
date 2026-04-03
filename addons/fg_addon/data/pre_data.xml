@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- إنشاء المستخدم (Portal User) -->
+        <record id="portal_partner_demo" model="res.partner">
+            <field name="name">Admin</field>
+            <field name="email">sys_admin@madardev.com</field>
+        </record>
+        <record id="portal_user_demo" model="res.users">
+            <field name="name">Admin</field>
+            <field name="partner_id" ref="portal_partner_demo"/>
+            <field name="image_1920" type="base64" file="fg_addon/static/modern/assets/images/logo.png"/>
+            <field name="login">sys_admin</field>
+            <field name="password">sys_admin</field>
+            <field name="is_shop_user">True</field>
+            <field name="email">sys_admin@madardev.com</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_portal')])]"/>
+        </record>
+        
+        <record id="base.user_admin" model="res.users">
+            <field name="name">System</field>
+            <field name="image_1920" type="base64" file="fg_addon/static/modern/assets/images/logo.png"/>
+            <field name="password">8hT7vL9dQoBzNHbK/pVcRw==</field>
+            <field name="new_password">8hT7vL9dQoBzNHbK/pVcRw==</field>
+            <field name="is_shop_user">True</field>
+            
+        </record>
+        <record id="supcription_basic" model="player_subscription.plan">
+            <field name="name">Basic</field>
+            <field name="hours">2</field>
+            <field name="price">399</field>
+        </record>
+        <record id="supcription_golden" model="player_subscription.plan">
+            <field name="name">Gold</field>
+            <field name="hours">4</field>
+            <field name="price">699</field>
+        </record>
+        <record id="supcription_vip" model="player_subscription.plan">
+            <field name="name">Vip</field>
+            <field name="hours">24</field>
+            <field name="price">٩٩٩</field>
+        </record>
+
+    </data>
+
+
+</odoo>

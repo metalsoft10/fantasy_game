@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+         <template id="main_pharma.side_bar">
+            <div id="scrollbar">
+                <div class="container-fluid">
+                    <div id="two-column-menu">
+                    </div>
+                    <ul class="navbar-nav" id="navbar-nav">
+                        <li class="menu-title"><span>Menu</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                <i class="las la-tachometer-alt"></i> <span >Dashboards </span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sidebarDashboards">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="/my" class="nav-link" data-key_t="main_menu_dashboard"> Home </a>
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        
+                    </ul>
+                    <ul class="navbar-nav" id="navbar-nav-more">
+                        <li class="menu-title"><span>Contact &amp; Support</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="/support"  role="button" aria-expanded="false" aria-controls="">
+                                <i class="las la-tachometer-alt"></i> <span >Contact &amp; Support </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+            
+    </data>
+</odoo>

@@ -1,0 +1,92 @@
+<odoo>
+    <data>
+        <template id="vendor_test">
+
+          <t t-call="main_pharma.layout">
+                  <t t-set="content">
+
+                      <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            
+
+                                            <div class="card-body">
+                                                <div class="table-responsive table-card">
+                                                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                                                        <tbody>
+                                                            
+                                                            <tr t-foreach="products" t-as="p">
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                            <img src="assets/images/products/img-1.png" alt="" class="img-fluid d-block" />
+                                                                        </div>
+                                                                        <div>
+                                                                            <h5 class="fs-14 my-1">
+                                                                              <a href="#" class="text-reset">
+                                                                                <t t-out="p.name"/>
+                                                                              </a>
+                                                                            </h5>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <t t-foreach="p.variant_seller_ids" t-as="s">
+                                                                      <t t-if="s.partner_id.id == request.env.user.partner_id.id">
+                                                                        <span class="text-muted">Price</span> :  <t t-out="s.price"/> <span class="text-muted">Min Qty</span> : <t t-out="s.min_qty"/>
+                                                                        <hr/>
+                                                                       
+                                                                      </t>
+                                                                    </t>
+                                                                    
+                                                                    
+                                                                </td>
+                                                                
+                                                                <td>
+                                                                    Edit
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                               
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                      
+                      </div> 
+
+
+
+                      <table class="table d-none">
+                        <tbody>
+                          <tr t-foreach="products" t-as="p">
+                            <td><t t-out="p.id"/></td>
+                            <td><t t-out="p.name"/></td>
+                            <!-- <td><t t-out="p.standard_price"/></td> -->
+                            <td>
+                            
+                            <t t-foreach="p.variant_seller_ids" t-as="s">
+                              <t t-if="s.partner_id.id == request.env.user.partner_id.id">
+                                <t t-out="s.partner_id.name"/><br/>
+                                <t t-out="s.price"/> with min_qty <t t-out="s.min_qty"/><br/>
+                                <!-- <t t-out="s.read()"/><br/> -->
+                              </t>
+                            </t>
+                            
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </t>
+          </t>
+          
+        </template>
+
+    </data>
+</odoo>

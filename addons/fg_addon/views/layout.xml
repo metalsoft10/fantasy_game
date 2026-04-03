@@ -1,0 +1,347 @@
+<odoo>
+    <data>
+        
+       
+        <template id="layout">
+                &lt;!doctype html&gt;
+                <html lang="en" t-attf-dir="#{'rtl' if request.env.user.sudo().lang == 'ar_001' else 'ltr'}" data-layout="vertical" data-topbar="light" data-sidebar="light" data-sidebar-size="sm-hover" data-sidebar-image="img-3" data-preloader="enable" data-bs-theme="light" data-layout-width="fluid" data-layout-position="fixed" data-layout-style="detached" data-sidebar-visibility="hide">
+                    <head>
+                        
+                        <meta charset="utf-8" />
+                        <title>Fantasy Game | <t t-out="page_title or request.env.company.name"/></title>
+                        
+                        <script id="fg_addon.layout.odooscript" type="text/javascript">
+                            var odoo = 
+                            {
+                                csrf_token: '<t t-esc="request.csrf_token(None)"/>',
+                                user:{
+                                        id: <t t-out="request.env.user.id"/>,
+                                        partner_id: <t t-out="request.env.user.partner_id.id"/>,
+                                        name: '<t t-out="request.env.user.name"/>',
+                                        
+                                    },
+                                    company:{
+                                            id: <t t-out="request.env.company.id"/>,
+                                            name: '<t t-out="request.env.company.name"/>',
+                                            country_id: <t t-out="request.env.company.country_id.id"/>,
+                                            country_name: '<t t-out="request.env.company.country_id.name"/>',
+                                            currency_id: <t t-out="request.env.company.currency_id.id"/>,
+                                            currency_name: '<t t-out="request.env.company.currency_id.name"/>',
+                                            country_list: JSON.parse(<t t-raw="json.dumps(request.env.user.sudo().layout_country_list())"/>),
+                                            
+                                            
+                                    },
+                            
+                                    debug: '<t t-esc="debug"/>',
+                            };
+                            odoo.__session_info__ = {};
+                            odoo.__session_info__.name = '<t t-out="request.env.user.name"/>';
+                            odoo.__session_info__.partner_id = '<t t-out="request.env.user.partner_id.id"/>';
+                            if (!/(^|;\s)tz=/.test(document.cookie)) {
+                                const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                                document.cookie = `tz=${userTZ}; path=/`;
+                            }
+                            window.TRANSLATIONS = {};
+                        </script>
+                        
+                         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                        <meta content="CareDesk Medical App" name="description" />
+                        <meta content="CareDesk" name="author" />
+                        <link rel="shortcut icon" href="/fg_addon/static/modern/assets/images/favicon.ico"/>
+                        <!--datatable css-->
+                        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"/>
+                        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+                        <!--datatable responsive css-->
+                        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
+
+                        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css"/>
+
+
+                        <link href="/fg_addon/static/modern/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+                        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+                        <link rel="stylesheet" href="/fg_addon/static/modern/assets/libs/swiper/swiper-bundle.min.css"/>
+                        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="*"/>
+                        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&amp;display=swap" rel="stylesheet"/>
+                        <link t-attf-href="/fg_addon/static/modern/assets/css/bootstrap#{'-rtl' if request.env.user.sudo().lang == 'ar_001' else '' }.min.css" rel="stylesheet" type="text/css" />
+                        <link href="/fg_addon/static/modern/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+                        <link t-attf-href="/fg_addon/static/modern/assets/css/app#{'-rtl' if request.env.user.sudo().lang == 'ar_001' else '' }.min.css" rel="stylesheet" type="text/css" />                        
+                        <link href="/fg_addon/static/modern/assets/libs/dropzone/dropzone.css" rel="stylesheet" type="text/css" />                        
+                        <link t-attf-href="/fg_addon/static/modern/assets/css/custom.min.css?ver=#{request.env.user.js_ver()}" rel="stylesheet" type="text/css" />
+                        <t t-call="fg_addon.external_css"/>
+
+
+
+
+                    </head>
+
+                <body>
+
+                    <!-- Begin page -->
+                    <div id="layout-wrapper" >
+
+                        <header id="page-topbar">
+                            <div class="layout-width">
+                                <div class="navbar-header">
+                                    <div class="d-flex">
+                                        <!-- LOGO -->
+                                        <div class="navbar-brand-box horizontal-logo">
+                                            <a href="/players" class="logo logo-dark">
+                                                <span class="logo-sm">
+                                                    <img t-attf-src="/web/image/res.company/#{request.env.company.id}/logo" alt="" height="22"/>
+                                                </span>
+                                                <span class="logo-lg">
+                                                
+                                                    <img t-attf-src="/web/image/res.company/#{request.env.company.id}/logo" alt="" height="32"/>
+                                                </span>
+                                            </a>
+
+                                            <a href="/players" class="logo logo-light">
+                                                <span class="logo-sm">
+                                                    <img t-attf-src="/web/image/res.company/#{request.env.company.id}/logo" alt="" height="22"/>
+                                                </span>
+                                                <span class="logo-lg">
+                                                    <img t-attf-src="/web/image/res.company/#{request.env.company.id}/logo" alt="" height="32"/>
+                                                </span>
+                                            </a>
+                                        </div>
+
+                                        <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon">
+                                            <span class="hamburger-icon">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                            </span>
+                                        </button>
+
+                                        <!-- App Search-->
+                                        <form class="app-search d-none d-md-block">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" t-att-placeholder="'Search ...'" autocomplete="off" id="search-options" value=""/>
+                                                <span class="mdi mdi-magnify search-widget-icon"></span>
+                                                <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options"></span>
+                                            </div>
+                                            
+                                            <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
+                                                
+                                                <div data-simplebar="" style="max-height: 600px;" id="general_search_container" >
+                                                    
+                                                    <div class="dropdown-header mt-2 general_search_branches_header">
+                                                        <h6 class="text-overflow text-muted mb-1 text-uppercase" data-key_t="main_global_search_branche">Branches</h6>
+                                                    </div>
+                                                    <div class="notification-list general_search_branches_list">
+                                                        
+                                                        
+                                                    </div>
+                                                    
+
+                                                    
+                                                    <div class="dropdown-header mt-2 general_search_staff_header">
+                                                        <h6 class="text-overflow text-muted mb-2 text-uppercase" data-key_t="main_global_search_staff" >Staff</h6>
+                                                    </div>
+                                                    <div class="notification-list general_search_staff_list">
+                                                        
+                                                    </div>
+                                                    
+
+
+                                                    <div class="dropdown-header mt-2 general_search_patient_header">
+                                                        <h6 class="text-overflow text-muted mb-2 text-uppercase" data-key_t="main_global_search_patient" >Patient</h6>
+                                                    </div>
+                                                    <div class="notification-list general_search_patient_list">
+                                                        
+                                                        
+                                                       
+                                                    </div>
+                                                
+                                                
+                                                </div>
+
+                                               
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+
+                                    <div class="d-flex align-items-center">
+
+                                        <div class="dropdown d-md-none topbar-head-dropdown header-item">
+                                            <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="bx bx-search fs-22"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
+                                                <form class="p-3">
+                                                    <div class="form-group m-0">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" placeholder="Search ......" aria-label="Recipient's username"/>
+                                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        
+
+                                        
+
+
+                                        
+                                        
+                                        <div class="dropdown ms-sm-3 header-item topbar-user">
+                                            <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="d-flex align-items-center">
+                                                    <img class="rounded-circle header-profile-user" t-attf-src="#{'/ajax/staff/image/' + str(request.env.uid) + '/l' if request.env.user.image_1920 else '/fg_addon/static/modern/assets/images/users/user-dummy-img.jpg'}" alt="Header Avatar"/>
+                                                    <span class="text-start ms-xl-2">
+                                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"><t t-out="request.env.user.name"/></span>
+                                                        <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text"></span>
+                                                    </span>
+                                                </span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <h6 class="dropdown-header">Welcome <t t-out="request.env.user.name"/>!</h6>
+                                                <!-- <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a> -->
+                                                <a class="dropdown-item" href="/support"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a>
+                                                <!-- <a class="dropdown-item" href="apps-tasks-kanban.html"><i class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a> -->
+                                                <a class="dropdown-item" href="/support"><i class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Help</span></a>
+                                                <div class="dropdown-divider" id="topbar_user_menu_divider"></div>
+                                                
+                                                <!-- <a class="dropdown-item" href="pages-profile-settings.html"><span class="badge bg-success-subtle text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a>
+                                                <a class="dropdown-item" href="auth-lockscreen-basic.html"><i class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Lock screen</span></a> -->
+                                                <a class="dropdown-item" href="/web/session/logout?redirect=/"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="logout">Logout</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+
+                        
+                                  
+                        
+                        <!-- ========== App Menu ========== -->
+                        <div class="app-menu navbar-menu">
+                            <!-- LOGO -->
+                            <div class="navbar-brand-box">
+                                <!-- Dark Logo-->
+                                <a href="/players" class="logo logo-dark">
+                                    <span class="logo-sm">
+                                        <img src="/fg_addon/static/modern/assets/images/logo-sm.png" alt="" height="22"/>
+                                    </span>
+                                    <span class="logo-lg">
+                                        <img src="/fg_addon/static/modern/assets/images/logo-dark.png" alt="" height="17"/>
+                                    </span>
+                                </a>
+                                <!-- Light Logo-->
+                                <a href="/players" class="logo logo-light">
+                                    <span class="logo-sm">
+                                        <img src="/fg_addon/static/modern/assets/images/logo-sm.png" alt="" height="22"/>
+                                    </span>
+                                    <span class="logo-lg">
+                                        <img src="/fg_addon/static/modern/assets/images/logo-light.png" alt="" height="17"/>
+                                    </span>
+                                </a>
+                                <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+                                    <i class="ri-record-circle-line"></i>
+                                </button>
+                            </div>
+                            <t t-call="fg_addon.side_bar"/>
+
+                            <div class="sidebar-background"></div>
+                        </div>
+                        <!-- Left Sidebar End -->
+                        <!-- Vertical Overlay-->
+                        <div class="vertical-overlay"></div>
+
+                        <!-- ============================================================== -->
+                        <!-- Start right Content here -->
+                        <!-- ============================================================== -->
+                        
+                        
+                        <div class="main-content">
+
+                            <div class="page-content">
+                                
+                                <div class="container-fluid">
+
+                                    <t t-out="content or ''"/>
+
+                                    
+                                    
+                                    
+
+                                </div>
+                                
+                            </div>
+                            <!-- End Page-content -->
+
+                            <footer class="footer">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <script>document.write(new Date().getFullYear())</script> ©<a href="https://madardev.com/" target="_blank" >Madar</a>.
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="text-sm-end d-none d-sm-block">
+                                                Design Develop by <a href="https://madardev.com/" target="_blank" >Madar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                        <!-- end main content-->
+
+                    </div>
+                    <!-- END layout-wrapper -->
+                    <t t-call="fg_addon.layout_modals" />
+
+
+
+                    <!--start back-to-top-->
+                    <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+                        <i class="ri-arrow-up-line"></i>
+                    </button>
+                    <!--end back-to-top-->
+
+                    <!--preloader-->
+                    <div id="preloader">
+                        <div id="status">
+                            <div class="spinner-border text-primary avatar-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    
+                    <t t-call="fg_addon.layout_offcanvas"/>
+                    
+                    
+                    <t t-call="fg_addon.layout_main_js"/>
+
+                    <t t-call="fg_addon.external_js"/>
+
+                    <script t-attf-src="/fg_addon/static/modern/assets/js/app.js?ver=1"></script>
+                    <script t-attf-src="/fg_addon/static/modern/assets/js/pages/general_search.js?ver=#{request.env.user.js_ver()}"></script>
+                   
+                </body>
+
+                </html>
+          
+        </template>
+
+       
+        <template id="fg_addon.external_css">
+        
+        </template>
+        <template id="fg_addon.external_js">
+        
+        </template>
+        
+        
+    </data>
+</odoo>
