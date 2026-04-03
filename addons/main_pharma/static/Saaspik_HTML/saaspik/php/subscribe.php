@@ -2,7 +2,7 @@
 /*-----------------------------------------------
   # Variables
   ---------------------------------------------*/
-$MailchimpAPI 	= 'YOUR_MAILCHIMP_KEY'; //<- Your Maichimp API Key
+$MailchimpAPI   = 'YOUR_MAILCHIMP_API_KEY'; //<- Your Maichimp API Key
 $MailchimpLID 	= 'b08d24d82a'; //<- Your Maichimp List IDkey
 
 $email 			= $_POST['email'];
